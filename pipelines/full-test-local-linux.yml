@@ -18,21 +18,12 @@ jobs:
     displayName: 'Install python tools'
 
   - script: |
-      export NNI_RELEASE=999.$(date +%Y%m%d%H%M%S)
-      echo $NNI_RELEASE
-      echo $PATH
-      pwd
-      echo $-
-      cat ~/.bashrc
-    displayName: 'debug'
-
-  - script: |
       set -e
       python3 -m pip uninstall nni --yes
       export NNI_RELEASE=999.$(date +%Y%m%d%H%M%S)
       python3 setup.py build_ts
       python3 setup.py bdist_wheel -p manylinux1_x86_64
-      python3 -m pip install dist/nni-999.0-py3-none-manylinux1_x86_64.whl
+      python3 -m pip install dist/nni-$NNI_RELEASE-py3-none-manylinux1_x86_64.whl
     displayName: 'Install NNI'
 
   - script: |
