@@ -23,6 +23,7 @@ jobs:
       NNI_RELEASE=999.0 python3 setup.py bdist_wheel -p manylinux1_x86_64
       python3 -m pip install dist/nni-999.0-py3-none-manylinux1_x86_64.whl
       nnictl --version || echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc
+      nnictl --version || source ~/.bashrc
     displayName: 'Install NNI'
 
   - script: |
