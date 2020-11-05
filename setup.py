@@ -132,7 +132,7 @@ def _find_python_packages():
 
 def _find_node_files():
     if not os.path.exists('nni_node'):
-        if release and 'built_ts' not in sys.argv:
+        if release and 'build_ts' not in sys.argv:
             sys.exit('ERROR: To build a release version, run "python setup.py built_ts" first')
         return []
     files = []
@@ -163,9 +163,10 @@ class BuildTs(Command):
 
 class Build(build):
     def run(self):
-        assert release, 'Please set environment variable "NNI_RELEASE=<release_version>"'
-        assert os.path.isfile('nni_node/main.js'), 'Please run "build_ts" before "build"'
-        assert not os.path.islink('nni_node/main.js'), 'This is a development build'
+        if not release:
+            sys.exit('Please set environment variable "NNI_RELEASE=<release_version>"')
+        if os.path.islink('nni_node/main.js'):
+            sys.exit('A development build already exists. Please uninstall NNI and run "python3 setup.py clean --all".')
         super().run()
 
 class Develop(develop):
