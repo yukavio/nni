@@ -12,6 +12,14 @@ jobs:
 
   steps:
   - script: |
+      python3 -m pip install -U --upgrade pip setuptools
+      python3 -m pip install -U pytest
+      echo "##vso[task.setvariable variable=PATH]${PATH}:${HOME}/.local/bin"
+    displayName: 'Install python tools'
+
+  - script: |
+      export NNI_RELEASE=999.$(date +%Y%m%d%H%M%S)
+      echo $NNI_RELEASE
       echo $PATH
       pwd
       echo $-
@@ -19,18 +27,12 @@ jobs:
     displayName: 'debug'
 
   - script: |
-      python3 -m pip install -U --upgrade pip setuptools
-      python3 -m pip install -U pytest
-    displayName: 'Install python tools'
-
-  - script: |
       set -e
       python3 -m pip uninstall nni --yes
-      NNI_RELEASE=999.0 python3 setup.py build_ts
-      NNI_RELEASE=999.0 python3 setup.py bdist_wheel -p manylinux1_x86_64
+      export NNI_RELEASE=999.$(date +%Y%m%d%H%M%S)
+      python3 setup.py build_ts
+      python3 setup.py bdist_wheel -p manylinux1_x86_64
       python3 -m pip install dist/nni-999.0-py3-none-manylinux1_x86_64.whl
-      nnictl --version || echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc
-      nnictl --version || source ~/.bashrc
     displayName: 'Install NNI'
 
   - script: |
