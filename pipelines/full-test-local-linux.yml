@@ -12,6 +12,13 @@ jobs:
 
   steps:
   - script: |
+      echo $PATH
+      pwd
+      echo $-
+      cat ~/.bashrc
+    displayName: 'debug'
+
+  - script: |
       python3 -m pip install -U --upgrade pip setuptools
       python3 -m pip install -U pytest
     displayName: 'Install python tools'
