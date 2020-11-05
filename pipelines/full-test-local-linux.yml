@@ -18,7 +18,7 @@ jobs:
 
   - script: |
       set -e
-      python3 -m pip uninstall nni
+      python3 -m pip uninstall nni --yes
       NNI_RELEASE=999.0 python3 setup.py build_ts
       NNI_RELEASE=999.0 python3 setup.py bdist_wheel -p manylinux1_x86_64
       python3 -m pip install dist/nni-999.0-py3-none-manylinux1_x86_64.whl
