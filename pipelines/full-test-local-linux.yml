@@ -54,18 +54,22 @@ jobs:
       (cd ts/nni_manager && yarn test)
       CI=true (cd ts/nasui && yarn test)
     displayName: 'Unit test'
+    continueOnError: true
 
   - script: |
       cd test
       python3 nni_test/nnitest/run_tests.py --config config/integration_tests.yml --ts local
     displayName: 'Integration test'
+    continueOnError: true
 
   - script: |
       cd test
       PATH=$HOME/.local/bin:$PATH source scripts/nas.sh
     displayName: 'NAS test'
+    continueOnError: true
 
   - script: |
       cd test
       source scripts/model_compression.sh
     displayName: 'Model compression test'
+    continueOnError: true
