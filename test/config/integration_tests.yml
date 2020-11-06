@@ -37,8 +37,8 @@ testCases:
 - name: sklearn-regression
   configFile: test/config/examples/sklearn-regression.yml
 
-- name: mnist-tfv1
-  configFile: test/config/examples/mnist-tfv1.yml
+- name: mnist-tensorflow
+  configFile: test/config/examples/mnist-tfv2.yml
   config:
     maxTrialNum: 1
     trialConcurrency: 1
