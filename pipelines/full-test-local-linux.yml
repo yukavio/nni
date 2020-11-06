@@ -19,7 +19,6 @@ jobs:
 
   - script: |
       set -e
-      python3 -m pip uninstall nni --yes
       export NNI_RELEASE=999.$(date +%Y%m%d%H%M%S)
       python3 setup.py build_ts
       python3 setup.py bdist_wheel -p manylinux1_x86_64
