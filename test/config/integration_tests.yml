@@ -43,12 +43,6 @@ testCases:
     maxTrialNum: 1
     trialConcurrency: 1
 
-- name: mnist-keras
-  configFile: test/config/examples/mnist-keras.yml
-  config:
-    maxTrialNum: 2
-    trialConcurrency: 1
-
 - name: mnist-pytorch-local
   configFile: test/config/examples/mnist-pytorch.yml
   # download data first, to prevent concurrent issue.
