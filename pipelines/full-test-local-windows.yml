@@ -18,8 +18,9 @@ jobs:
   
   - script: |
       python -m pip uninstall nni --yes
-      NNI_RELEASE=999.0 python setup.py build_ts
-      NNI_RELEASE=999.0 python setup.py bdist_wheel -p win_amd64
+      set NNI_RELEASE=999.0
+      python setup.py build_ts
+      python setup.py bdist_wheel -p win_amd64
       python -m pip install dist/nni-999.0-py3-none-win_amd64.whl
     displayName: Install NNI
   
